@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32901.215
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MysteryAuction", "MysteryAuction\MysteryAuction.csproj", "{6DF345C7-E994-4142-8352-E91A43BFF4FF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6DF345C7-E994-4142-8352-E91A43BFF4FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DF345C7-E994-4142-8352-E91A43BFF4FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DF345C7-E994-4142-8352-E91A43BFF4FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DF345C7-E994-4142-8352-E91A43BFF4FF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C5E1471D-40FF-4E7B-A023-7B6E27F3F08F}
+	EndGlobalSection
+EndGlobal
