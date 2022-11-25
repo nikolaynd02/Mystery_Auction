@@ -6,5 +6,11 @@
         {
             public const int MaxUsernameLength = 20;
         }
+
+        public class MysteryProductConstraints
+        {
+            public const int MaxNameLength = 20;
+            public const int MaxDescriptionLength = 3000;
+        }
     }
 }
