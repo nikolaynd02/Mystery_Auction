@@ -3,20 +3,28 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MysteryAuction.Data.Models
 {
-    public class MysteryProduct
+    public class Car
     {
         [Key]
         public Guid Id { get; set; }
 
         [Required]
-        [MaxLength(DataConstraints.MysteryProductConstraints.MaxNameLength)]
-        public string ProductName { get; set; } = null!;
+        [MaxLength(DataConstraints.CarConstraints.MaxMakerLength)]
+        public string Maker { get; set; } = null!;
+
+        [Required]
+        [MaxLength(DataConstraints.CarConstraints.MaxModelLength)]
+        public string Model { get; set; } = null!;
+
+        [Required]
+        [MaxLength(DataConstraints.CarConstraints.MaxEngineLength)]
+        public string Engine { get; set; } = null!;
 
         [Required]
         [MaxLength(DataConstraints.MaxDescriptionLength)]
         public string Description { get; set; } = null!;
 
-        [Required] 
+        [Required]
         public string ImageUrl { get; set; } = null!;
 
         public decimal StartingPrice { get; set; }
@@ -40,6 +48,5 @@ namespace MysteryAuction.Data.Models
         public string BuyerId { get; set; }
 
         public virtual MysteryAuctionUser Buyer { get; set; }
-
     }
 }

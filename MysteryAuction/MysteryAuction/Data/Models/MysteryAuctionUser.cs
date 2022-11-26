@@ -9,15 +9,26 @@ namespace MysteryAuction.Data.Models
         {
             this.BoughtMysteryProducts = new HashSet<MysteryProduct>();
             this.MysteryProductsForSale = new HashSet<MysteryProduct>();
+
+            this.CarsForSale = new HashSet<Car>();
+            this.BoughtCars = new HashSet<Car>();
+
+            this.UnclaimedContainersForSale = new HashSet<UnclaimedContainer>();
+            this.BoughtUnclaimedContainers = new HashSet<UnclaimedContainer>();
         }
 
-        [Required] 
-        [MaxLength(DataConstraints.UserConstraints.MaxUsernameLength)]
-        public string Username { get; set; } = null!;
 
 
         public virtual ICollection<MysteryProduct> MysteryProductsForSale { get; set; }
 
         public virtual ICollection<MysteryProduct> BoughtMysteryProducts { get; set; }
+
+        public virtual ICollection<Car> CarsForSale { get; set; }
+
+        public virtual ICollection<Car> BoughtCars{ get; set; }
+
+        public virtual ICollection<UnclaimedContainer> UnclaimedContainersForSale { get; set; }
+
+        public virtual ICollection<UnclaimedContainer> BoughtUnclaimedContainers { get; set; }
     }
 }

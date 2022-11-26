@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MysteryAuction.Data;
 
@@ -11,9 +12,10 @@ using MysteryAuction.Data;
 namespace MysteryAuction.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221126221347_Initial_Migration1")]
+    partial class Initial_Migration1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -292,7 +294,7 @@ namespace MysteryAuction.Data.Migrations
 
                     b.HasIndex("SellerId");
 
-                    b.ToTable("Cars", (string)null);
+                    b.ToTable("Cars");
                 });
 
             modelBuilder.Entity("MysteryAuction.Data.Models.MysteryProduct", b =>
@@ -347,7 +349,7 @@ namespace MysteryAuction.Data.Migrations
 
                     b.HasIndex("SellerId");
 
-                    b.ToTable("MysteryProducts", (string)null);
+                    b.ToTable("MysteryProducts");
                 });
 
             modelBuilder.Entity("MysteryAuction.Data.Models.UnclaimedContainer", b =>
@@ -432,7 +434,7 @@ namespace MysteryAuction.Data.Migrations
 
                     b.HasIndex("SellerId");
 
-                    b.ToTable("UnclaimedContainers", (string)null);
+                    b.ToTable("UnclaimedContainers");
                 });
 
             modelBuilder.Entity("MysteryAuction.Data.Models.MysteryAuctionUser", b =>
