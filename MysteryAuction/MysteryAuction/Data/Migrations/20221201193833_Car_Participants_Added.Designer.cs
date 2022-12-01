@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MysteryAuction.Data;
 
@@ -11,9 +12,10 @@ using MysteryAuction.Data;
 namespace MysteryAuction.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221201193833_Car_Participants_Added")]
+    partial class Car_Participants_Added
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,21 +23,6 @@ namespace MysteryAuction.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("CarMysteryAuctionUser", b =>
-                {
-                    b.Property<string>("ParticipantsId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<Guid>("UserCarsParticipationId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("ParticipantsId", "UserCarsParticipationId");
-
-                    b.HasIndex("UserCarsParticipationId");
-
-                    b.ToTable("CarMysteryAuctionUser");
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -450,56 +437,16 @@ namespace MysteryAuction.Data.Migrations
                     b.ToTable("UnclaimedContainers");
                 });
 
-            modelBuilder.Entity("MysteryAuctionUserMysteryProduct", b =>
-                {
-                    b.Property<string>("ParticipantsId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<Guid>("UserMysteryProductsParticipationId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("ParticipantsId", "UserMysteryProductsParticipationId");
-
-                    b.HasIndex("UserMysteryProductsParticipationId");
-
-                    b.ToTable("MysteryAuctionUserMysteryProduct");
-                });
-
-            modelBuilder.Entity("MysteryAuctionUserUnclaimedContainer", b =>
-                {
-                    b.Property<string>("ParticipantsId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<Guid>("UserUnclaimedContainersParticipationId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("ParticipantsId", "UserUnclaimedContainersParticipationId");
-
-                    b.HasIndex("UserUnclaimedContainersParticipationId");
-
-                    b.ToTable("MysteryAuctionUserUnclaimedContainer");
-                });
-
             modelBuilder.Entity("MysteryAuction.Data.Models.MysteryAuctionUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
+                    b.Property<Guid>("CarId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasIndex("CarId");
+
                     b.HasDiscriminator().HasValue("MysteryAuctionUser");
-                });
-
-            modelBuilder.Entity("CarMysteryAuctionUser", b =>
-                {
-                    b.HasOne("MysteryAuction.Data.Models.MysteryAuctionUser", null)
-                        .WithMany()
-                        .HasForeignKey("ParticipantsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MysteryAuction.Data.Models.Car", null)
-                        .WithMany()
-                        .HasForeignKey("UserCarsParticipationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -610,34 +557,20 @@ namespace MysteryAuction.Data.Migrations
                     b.Navigation("Seller");
                 });
 
-            modelBuilder.Entity("MysteryAuctionUserMysteryProduct", b =>
+            modelBuilder.Entity("MysteryAuction.Data.Models.MysteryAuctionUser", b =>
                 {
-                    b.HasOne("MysteryAuction.Data.Models.MysteryAuctionUser", null)
-                        .WithMany()
-                        .HasForeignKey("ParticipantsId")
+                    b.HasOne("MysteryAuction.Data.Models.Car", "Car")
+                        .WithMany("Participants")
+                        .HasForeignKey("CarId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MysteryAuction.Data.Models.MysteryProduct", null)
-                        .WithMany()
-                        .HasForeignKey("UserMysteryProductsParticipationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Car");
                 });
 
-            modelBuilder.Entity("MysteryAuctionUserUnclaimedContainer", b =>
+            modelBuilder.Entity("MysteryAuction.Data.Models.Car", b =>
                 {
-                    b.HasOne("MysteryAuction.Data.Models.MysteryAuctionUser", null)
-                        .WithMany()
-                        .HasForeignKey("ParticipantsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MysteryAuction.Data.Models.UnclaimedContainer", null)
-                        .WithMany()
-                        .HasForeignKey("UserUnclaimedContainersParticipationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Participants");
                 });
 
             modelBuilder.Entity("MysteryAuction.Data.Models.MysteryAuctionUser", b =>

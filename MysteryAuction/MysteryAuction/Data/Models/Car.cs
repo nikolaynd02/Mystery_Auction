@@ -5,6 +5,11 @@ namespace MysteryAuction.Data.Models
 {
     public class Car
     {
+        public Car()
+        {
+            this.Participants = new HashSet<MysteryAuctionUser>();
+        }
+
         [Key]
         public Guid Id { get; set; }
 
@@ -31,6 +36,7 @@ namespace MysteryAuction.Data.Models
 
         public decimal? SoldPrice { get; set; }
 
+
         public DateTime AddedAt { get; set; }
 
         public DateTime StartOfAuction { get; set; }
@@ -48,5 +54,7 @@ namespace MysteryAuction.Data.Models
         public string BuyerId { get; set; }
 
         public virtual MysteryAuctionUser Buyer { get; set; }
+
+        public virtual ICollection<MysteryAuctionUser> Participants { get; set; }
     }
 }

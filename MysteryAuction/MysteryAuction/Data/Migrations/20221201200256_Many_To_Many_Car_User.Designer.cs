@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MysteryAuction.Data;
 
@@ -11,9 +12,10 @@ using MysteryAuction.Data;
 namespace MysteryAuction.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221201200256_Many_To_Many_Car_User")]
+    partial class Many_To_Many_Car_User
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -450,36 +452,6 @@ namespace MysteryAuction.Data.Migrations
                     b.ToTable("UnclaimedContainers");
                 });
 
-            modelBuilder.Entity("MysteryAuctionUserMysteryProduct", b =>
-                {
-                    b.Property<string>("ParticipantsId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<Guid>("UserMysteryProductsParticipationId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("ParticipantsId", "UserMysteryProductsParticipationId");
-
-                    b.HasIndex("UserMysteryProductsParticipationId");
-
-                    b.ToTable("MysteryAuctionUserMysteryProduct");
-                });
-
-            modelBuilder.Entity("MysteryAuctionUserUnclaimedContainer", b =>
-                {
-                    b.Property<string>("ParticipantsId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<Guid>("UserUnclaimedContainersParticipationId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("ParticipantsId", "UserUnclaimedContainersParticipationId");
-
-                    b.HasIndex("UserUnclaimedContainersParticipationId");
-
-                    b.ToTable("MysteryAuctionUserUnclaimedContainer");
-                });
-
             modelBuilder.Entity("MysteryAuction.Data.Models.MysteryAuctionUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
@@ -608,36 +580,6 @@ namespace MysteryAuction.Data.Migrations
                     b.Navigation("Buyer");
 
                     b.Navigation("Seller");
-                });
-
-            modelBuilder.Entity("MysteryAuctionUserMysteryProduct", b =>
-                {
-                    b.HasOne("MysteryAuction.Data.Models.MysteryAuctionUser", null)
-                        .WithMany()
-                        .HasForeignKey("ParticipantsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MysteryAuction.Data.Models.MysteryProduct", null)
-                        .WithMany()
-                        .HasForeignKey("UserMysteryProductsParticipationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("MysteryAuctionUserUnclaimedContainer", b =>
-                {
-                    b.HasOne("MysteryAuction.Data.Models.MysteryAuctionUser", null)
-                        .WithMany()
-                        .HasForeignKey("ParticipantsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MysteryAuction.Data.Models.UnclaimedContainer", null)
-                        .WithMany()
-                        .HasForeignKey("UserUnclaimedContainersParticipationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("MysteryAuction.Data.Models.MysteryAuctionUser", b =>

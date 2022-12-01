@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Identity;
 
 namespace MysteryAuction.Data.Models
@@ -7,6 +8,10 @@ namespace MysteryAuction.Data.Models
     {
         public MysteryAuctionUser()
         {
+            this.UserCarsParticipation = new HashSet<Car>();
+            this.UserMysteryProductsParticipation = new HashSet<MysteryProduct>();
+            this.UserUnclaimedContainersParticipation = new HashSet<UnclaimedContainer>();
+
             this.BoughtMysteryProducts = new HashSet<MysteryProduct>();
             this.MysteryProductsForSale = new HashSet<MysteryProduct>();
 
@@ -17,6 +22,11 @@ namespace MysteryAuction.Data.Models
             this.BoughtUnclaimedContainers = new HashSet<UnclaimedContainer>();
         }
 
+        public virtual ICollection<Car> UserCarsParticipation { get; set; }
+
+        public virtual ICollection<MysteryProduct> UserMysteryProductsParticipation { get; set; }
+
+        public virtual ICollection<UnclaimedContainer> UserUnclaimedContainersParticipation { get; set; }
 
 
         public virtual ICollection<MysteryProduct> MysteryProductsForSale { get; set; }

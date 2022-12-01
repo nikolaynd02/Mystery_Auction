@@ -22,6 +22,8 @@ namespace MysteryAuction.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            
+
             builder.Entity<Car>(e =>
                 e
                     .HasOne(c => c.Seller)

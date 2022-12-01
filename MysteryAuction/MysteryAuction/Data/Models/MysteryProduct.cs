@@ -5,6 +5,11 @@ namespace MysteryAuction.Data.Models
 {
     public class MysteryProduct
     {
+        public MysteryProduct()
+        {
+            this.Participants = new HashSet<MysteryAuctionUser>();
+        }
+
         [Key]
         public Guid Id { get; set; }
 
@@ -40,6 +45,8 @@ namespace MysteryAuction.Data.Models
         public string BuyerId { get; set; }
 
         public virtual MysteryAuctionUser Buyer { get; set; }
+
+        public virtual ICollection<MysteryAuctionUser> Participants { get; set; }
 
     }
 }
