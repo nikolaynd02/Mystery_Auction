@@ -1,18 +1,18 @@
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using MysteryAuction.Data;
-using MysteryAuction.Data.Models;
+using MysteryAuction.Infrastructure.Data;
+using MysteryAuction.Infrastructure.Data.Models;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
+builder.Services.AddDbContext<MysteryAuctionDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<MysteryAuctionUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+    .AddEntityFrameworkStores<MysteryAuctionDbContext>();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();

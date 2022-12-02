@@ -1,6 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+@using MysteryAuction.Infrastructure.Data.Models
+@inject SignInManager<MysteryAuctionUser> SignInManager
+@inject UserManager<MysteryAuctionUser> UserManager
 
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))

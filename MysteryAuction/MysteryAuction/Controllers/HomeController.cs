@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MysteryAuction.Models;
 using System.Diagnostics;
+using MysteryAuction.Core.Models;
 
 namespace MysteryAuction.Controllers
 {
