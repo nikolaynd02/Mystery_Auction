@@ -19,6 +19,8 @@ namespace MysteryAuction.Infrastructure.Data
 
         public DbSet<UnclaimedContainer> UnclaimedContainers { get; set; }
 
+        public DbSet<Bid> Bids { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

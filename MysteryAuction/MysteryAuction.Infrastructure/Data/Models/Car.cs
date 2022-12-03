@@ -5,10 +5,6 @@ namespace MysteryAuction.Infrastructure.Data.Models
 {
     public class Car
     {
-        public Car()
-        {
-            this.Participants = new HashSet<MysteryAuctionUser>();
-        }
 
         [Key]
         public Guid Id { get; set; }
@@ -55,6 +51,5 @@ namespace MysteryAuction.Infrastructure.Data.Models
 
         public virtual MysteryAuctionUser Buyer { get; set; }
 
-        public virtual ICollection<MysteryAuctionUser> Participants { get; set; } 
     }
 }
