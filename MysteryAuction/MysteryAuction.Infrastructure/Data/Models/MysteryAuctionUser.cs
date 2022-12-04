@@ -4,31 +4,12 @@ namespace MysteryAuction.Infrastructure.Data.Models
 {
     public class MysteryAuctionUser : IdentityUser
     {
-        public MysteryAuctionUser()
-        {
 
-            this.BoughtMysteryProducts = new HashSet<MysteryProduct>();
-            this.MysteryProductsForSale = new HashSet<MysteryProduct>();
+        public virtual ICollection<Bid> Bids { get; set; } = new HashSet<Bid>();
 
-            this.CarsForSale = new HashSet<Car>();
-            this.BoughtCars = new HashSet<Car>();
+        public virtual ICollection<Product> MysteryProductsForSale { get; set; } = new HashSet<Product>();
 
-            this.UnclaimedContainersForSale = new HashSet<UnclaimedContainer>();
-            this.BoughtUnclaimedContainers = new HashSet<UnclaimedContainer>();
-        }
+        public virtual ICollection<Product> BoughtMysteryProducts { get; set; } = new HashSet<Product>();
 
-
-
-        public virtual ICollection<MysteryProduct> MysteryProductsForSale { get; set; }
-
-        public virtual ICollection<MysteryProduct> BoughtMysteryProducts { get; set; }
-
-        public virtual ICollection<Car> CarsForSale { get; set; }
-
-        public virtual ICollection<Car> BoughtCars{ get; set; }
-
-        public virtual ICollection<UnclaimedContainer> UnclaimedContainersForSale { get; set; }
-
-        public virtual ICollection<UnclaimedContainer> BoughtUnclaimedContainers { get; set; }
     }
 }

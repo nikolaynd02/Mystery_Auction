@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,14 +10,13 @@ namespace MysteryAuction.Infrastructure.Data.Models
 {
     public class Bid
     {
-        [Key]
-        public Guid Id { get; set; }
+        [ForeignKey(nameof(User))] 
+        public string UserId { get; set; }
+        public virtual MysteryAuctionUser User { get; set; }
 
-        [Required] 
-        public string UserId { get; set; } = null!;
-
-        [Required]
-        public string ProductId { get; set; } = null!;
+        [ForeignKey(nameof(Product))]
+        public Guid ProductId { get; set; }
+        public virtual Product Product { get; set; }
 
         [Required]
         public decimal Price { get; set; }

@@ -13,60 +13,38 @@ namespace MysteryAuction.Infrastructure.Data
 
         public DbSet<MysteryAuctionUser> MysteryAuctionUsers { get; set; }
 
-        public DbSet<MysteryProduct> MysteryProducts { get; set; }
-
-        public DbSet<Car> Cars { get; set; }
-
-        public DbSet<UnclaimedContainer> UnclaimedContainers { get; set; }
+        public DbSet<Product> MysteryProducts { get; set; }
 
         public DbSet<Bid> Bids { get; set; }
+
+        public DbSet<ProductCategory> ProductsCategories { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            
-
-            builder.Entity<Car>(e =>
+            builder.Entity<Bid>(e =>
                 e
-                    .HasOne(c => c.Seller)
-                    .WithMany(mau => mau.CarsForSale)
-                    .HasForeignKey(c => c.SellerId)
-                    .OnDelete(DeleteBehavior.NoAction));
+                    .HasKey(k => new
+                    {
+                        k.UserId,
+                        k.ProductId
+                    }));
 
-            builder.Entity<Car>(e =>
-                e
-                    .HasOne(c => c.Buyer)
-                    .WithMany(mau => mau.BoughtCars)
-                    .HasForeignKey(c => c.BuyerId)
-                    .OnDelete(DeleteBehavior.NoAction));
 
-            builder.Entity<MysteryProduct>(e =>
+            builder.Entity<Product>(e =>
                 e
                     .HasOne(mp => mp.Seller)
                     .WithMany(mau => mau.MysteryProductsForSale)
                     .HasForeignKey(mp => mp.SellerId)
                     .OnDelete(DeleteBehavior.NoAction));
 
-            builder.Entity<MysteryProduct>(e =>
+            builder.Entity<Product>(e =>
                 e
                     .HasOne(mp => mp.Buyer)
                     .WithMany(mau => mau.BoughtMysteryProducts)
                     .HasForeignKey(mp => mp.BuyerId)
                     .OnDelete(DeleteBehavior.NoAction));
 
-            builder.Entity<UnclaimedContainer>(e =>
-                e
-                    .HasOne(uc => uc.Seller)
-                    .WithMany(mau => mau.UnclaimedContainersForSale)
-                    .HasForeignKey(uc => uc.SellerId)
-                    .OnDelete(DeleteBehavior.NoAction));
-
-            builder.Entity<UnclaimedContainer>(e =>
-                e
-                    .HasOne(uc => uc.Buyer)
-                    .WithMany(mau => mau.BoughtUnclaimedContainers)
-                    .HasForeignKey(uc => uc.BuyerId)
-                    .OnDelete(DeleteBehavior.NoAction));
 
 
             base.OnModelCreating(builder);

@@ -3,35 +3,26 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MysteryAuction.Infrastructure.Data.Models
 {
-    public class Car
+    public class Product
     {
 
         [Key]
         public Guid Id { get; set; }
 
         [Required]
-        [MaxLength(DataConstraints.CarConstraints.MaxMakerLength)]
-        public string Maker { get; set; } = null!;
+        [MaxLength(DataConstraints.MysteryProductConstraints.MaxNameLength)]
+        public string ProductName { get; set; } = null!;
 
         [Required]
-        [MaxLength(DataConstraints.CarConstraints.MaxModelLength)]
-        public string Model { get; set; } = null!;
-
-        [Required]
-        [MaxLength(DataConstraints.CarConstraints.MaxEngineLength)]
-        public string Engine { get; set; } = null!;
-
-        [Required]
-        [MaxLength(DataConstraints.MaxDescriptionLength)]
+        [MaxLength(DataConstraints.MysteryProductConstraints.MaxDescriptionLength)]
         public string Description { get; set; } = null!;
 
-        [Required]
+        [Required] 
         public string ImageUrl { get; set; } = null!;
 
         public decimal StartingPrice { get; set; }
 
         public decimal? SoldPrice { get; set; }
-
 
         public DateTime AddedAt { get; set; }
 
@@ -44,12 +35,18 @@ namespace MysteryAuction.Infrastructure.Data.Models
         [ForeignKey(nameof(Seller))]
         public string SellerId { get; set; } 
 
-        public virtual MysteryAuctionUser Seller { get; set; } 
+        public virtual MysteryAuctionUser Seller { get; set; }
 
         [ForeignKey(nameof(Buyer))]
         public string BuyerId { get; set; }
 
         public virtual MysteryAuctionUser Buyer { get; set; }
+
+        [ForeignKey(nameof(Category))] 
+        public Guid CategoryId { get; set; }
+        public virtual ProductCategory Category { get; set; }
+
+        public virtual ICollection<Bid> Bids { get; set; } = new HashSet<Bid>();
 
     }
 }
