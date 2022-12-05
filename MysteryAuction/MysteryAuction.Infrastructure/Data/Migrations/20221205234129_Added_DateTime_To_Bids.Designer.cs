@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MysteryAuction.Infrastructure.Data;
 
@@ -11,9 +12,10 @@ using MysteryAuction.Infrastructure.Data;
 namespace MysteryAuction.Data.Migrations
 {
     [DbContext(typeof(MysteryAuctionDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221205234129_Added_DateTime_To_Bids")]
+    partial class Added_DateTime_To_Bids
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

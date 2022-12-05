@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MysteryAuction.Infrastructure.Data;
 
@@ -11,9 +12,10 @@ using MysteryAuction.Infrastructure.Data;
 namespace MysteryAuction.Data.Migrations
 {
     [DbContext(typeof(MysteryAuctionDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221205205705_Changed_Products_Table_Name")]
+    partial class Changed_Products_Table_Name
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -240,9 +242,6 @@ namespace MysteryAuction.Data.Migrations
 
                     b.Property<bool>("HasWon")
                         .HasColumnType("bit");
-
-                    b.Property<DateTime>("MadeAt")
-                        .HasColumnType("datetime2");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");

@@ -13,7 +13,7 @@ namespace MysteryAuction.Infrastructure.Data
 
         public DbSet<MysteryAuctionUser> MysteryAuctionUsers { get; set; }
 
-        public DbSet<Product> MysteryProducts { get; set; }
+        public DbSet<Product> Products { get; set; }
 
         public DbSet<Bid> Bids { get; set; }
 
