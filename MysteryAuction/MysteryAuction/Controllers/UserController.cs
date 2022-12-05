@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using MysteryAuction.Core.Models;
+using MysteryAuction.Core.Models.User;
 using MysteryAuction.Infrastructure.Data.Models;
 
 namespace MysteryAuction.Controllers
