@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 
-namespace MysteryAuction.Core.Models
+namespace MysteryAuction.Core.Models.User
 {
     public class RegisterViewModel
     {

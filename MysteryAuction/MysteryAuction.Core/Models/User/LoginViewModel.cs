@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MysteryAuction.Core.Models
+namespace MysteryAuction.Core.Models.User
 {
     public class LoginViewModel
     {
-        [Required] 
+        [Required]
         public string UserName { get; set; } = null!;
 
         [Required]
