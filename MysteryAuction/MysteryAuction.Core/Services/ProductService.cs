@@ -71,21 +71,26 @@ namespace MysteryAuction.Core.Services
             await context.SaveChangesAsync();
         }
 
+        //Might not be the right place for it.
         public async Task ChooseBuyerAsync(ProductViewModel model)
         {
-            var winningBid = context.Bids
+            var winningBid = await context.Bids
                 .Include(b => b.Product)
                 .Where(b => b.Product.ProductName == model.ProductName)
                 .OrderByDescending(b => b.Price)
                 .ThenBy(b => b.MadeAt)
                 .FirstOrDefaultAsync();
 
-            //TODO: Finish implementation
+            //Test when there is no buyer
             if (winningBid == null)
             {
-
+                return;
             }
 
+            winningBid.HasWon = true;
+
+            context.Bids.Update(winningBid);
+            //TODO: Finish implementing. Product has to receive Buyer and User has to get product in his BoughtCollection
         }
 
         public async Task<IEnumerable<ProductCategory>> GetAllCategoriesAsync()

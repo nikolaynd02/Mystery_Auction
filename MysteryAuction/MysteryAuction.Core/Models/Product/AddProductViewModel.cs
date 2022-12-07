@@ -19,18 +19,17 @@ namespace MysteryAuction.Core.Models.Product
         public string Description { get; set; } = null!;
 
         [Required]
-        public string Category { get; set; } = null!;
-
-        [Required]
         [Url]
         public string ImageUrl { get; set; } = null!;
 
+        [Range(DataConstraints.MysteryProductConstraints.MinPrice, DataConstraints.MysteryProductConstraints.MaxPrice)]
         public decimal StartingPrice { get; set; }
-
 
         [Required]
         public string SellerId { get; set; } = null!;
 
         public Guid CategoryId { get; set; }
+
+        public IEnumerable<ProductCategory> Categories { get; set; } = new HashSet<ProductCategory>();
     }
 }
