@@ -15,6 +15,5 @@ namespace MysteryAuction.Core.Models.Bid
 
         public DateTime MadeAt { get; set; }
 
-        public bool HasWon { get; set; } 
     }
 }

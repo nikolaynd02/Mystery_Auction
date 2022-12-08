@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using MysteryAuction.Infrastructure.Data.Models;
 
 namespace MysteryAuction.Core.Models.Product
@@ -26,10 +27,11 @@ namespace MysteryAuction.Core.Models.Product
         public decimal StartingPrice { get; set; }
 
         [Required]
+        [ValidateNever]
         public string SellerId { get; set; } = null!;
 
         public Guid CategoryId { get; set; }
 
-        public IEnumerable<ProductCategory> Categories { get; set; } = new HashSet<ProductCategory>();
+        public IEnumerable<Category> Categories { get; set; } = new HashSet<Category>();
     }
 }
