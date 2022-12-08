@@ -11,6 +11,6 @@ namespace MysteryAuction.Core.Contracts
 
         public Task ChooseBuyerAsync(ProductViewModel model);
 
-        public Task<IEnumerable<ProductCategory>> GetAllCategoriesAsync();
+        public Task<IEnumerable<Category>> GetAllCategoriesAsync();
     }
 }

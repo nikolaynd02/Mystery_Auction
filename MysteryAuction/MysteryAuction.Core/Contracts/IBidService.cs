@@ -6,7 +6,5 @@ namespace MysteryAuction.Core.Contracts
     {
         public Task AddBidAsync(AddBidViewModel model);
 
-
-        public Task PickWinnerAsync();
     }
 }
