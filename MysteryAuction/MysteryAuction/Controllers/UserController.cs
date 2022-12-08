@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using MysteryAuction.Core.Constants;
 using MysteryAuction.Core.Models.User;
 using MysteryAuction.Infrastructure.Data.Models;
 
@@ -11,12 +12,15 @@ namespace MysteryAuction.Controllers
     {
         private readonly UserManager<MysteryAuctionUser> userManager;
         private readonly SignInManager<MysteryAuctionUser> signInManager;
+        private readonly RoleManager<IdentityRole> roleManager;
 
         public UserController(UserManager<MysteryAuctionUser> _userManager,
-            SignInManager<MysteryAuctionUser> _signInManager)
+            SignInManager<MysteryAuctionUser> _signInManager,
+            RoleManager<IdentityRole> _roleManager)
         {
             userManager = _userManager;
             signInManager = _signInManager;
+            roleManager = _roleManager;
         }
 
         [HttpGet]
@@ -111,6 +115,27 @@ namespace MysteryAuction.Controllers
         public async Task<IActionResult> Logout()
         {
             await signInManager.SignOutAsync();
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        public async Task<IActionResult> CreateRoles()
+        {
+
+            await roleManager.CreateAsync(new IdentityRole(RoleConstants.Admin));
+
+            return RedirectToAction("Index", "Home");
+        }
+        //Add role to the user found by the given email.
+        public async Task<IActionResult> AddUsersToRoles()
+        {
+            const string  email = "admin@mail.com";
+
+
+            var user = await userManager.FindByNameAsync(email);
+
+
+            await userManager.AddToRolesAsync(user, new string[] { RoleConstants.Admin });
 
             return RedirectToAction("Index", "Home");
         }

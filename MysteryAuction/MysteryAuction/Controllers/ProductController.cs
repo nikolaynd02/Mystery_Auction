@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MysteryAuction.Core.Contracts;
 using MysteryAuction.Core.Models.Product;
 using MysteryAuction.Core.Services;
+using MysteryAuction.Infrastructure.Data.Models;
 
 namespace MysteryAuction.Controllers
 {
@@ -38,8 +40,12 @@ namespace MysteryAuction.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(AddProductViewModel model)
         {
+            model.SellerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+
             if (!ModelState.IsValid)
             {
+                model.Categories = await productService.GetAllCategoriesAsync();
                 return View(model);
             }
 

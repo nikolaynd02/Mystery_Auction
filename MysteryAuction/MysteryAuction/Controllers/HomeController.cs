@@ -15,7 +15,7 @@ namespace MysteryAuction.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("All", "Product");
         }
 
         public IActionResult Privacy()
