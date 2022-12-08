@@ -1,0 +1,30 @@
+﻿@using MysteryAuction.Core.Models.CategoryModels
+@model AddCategoryViewModel
+
+@{
+    ViewBag.Title = "Add Category";
+}
+
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form asp-action="Add" asp-controller="Category" method="post">
+            <div class="mb-3">
+                <label asp-for="@Model.Name" class="form-label">Product's Name:</label>
+                <input asp-for="@Model.Name" class="form-control" aria-required="true" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <input class="btn btn-primary" type="submit" value="Add category" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+            <partial name="_ValidationScriptsPartial" />
+}
