@@ -17,7 +17,7 @@ namespace MysteryAuction.Infrastructure.Data
 
         public DbSet<Bid> Bids { get; set; }
 
-        public DbSet<ProductCategory> ProductsCategories { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)

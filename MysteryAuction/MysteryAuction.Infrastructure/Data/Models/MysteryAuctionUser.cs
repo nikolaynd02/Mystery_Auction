@@ -4,7 +4,7 @@ namespace MysteryAuction.Infrastructure.Data.Models
 {
     public class MysteryAuctionUser : IdentityUser
     {
-
+        public bool IsDeleted { get; set; }
         public virtual ICollection<Bid> Bids { get; set; } = new HashSet<Bid>();
 
         public virtual ICollection<Product> MysteryProductsForSale { get; set; } = new HashSet<Product>();

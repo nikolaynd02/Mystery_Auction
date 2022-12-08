@@ -16,7 +16,8 @@
 
         public class CategoryConstraints
         {
-            public const int MaxCategoryLength = 20;
+            public const int MaxNameLength = 20;
+            public const int MinNameLength = 2;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 
 namespace MysteryAuction.Infrastructure.Data.Models
 {
@@ -38,13 +39,13 @@ namespace MysteryAuction.Infrastructure.Data.Models
         public virtual MysteryAuctionUser Seller { get; set; }
 
         [ForeignKey(nameof(Buyer))]
-        public string BuyerId { get; set; }
+        public string? BuyerId { get; set; }
 
-        public virtual MysteryAuctionUser Buyer { get; set; }
+        public virtual MysteryAuctionUser? Buyer { get; set; }
 
         [ForeignKey(nameof(Category))] 
         public Guid CategoryId { get; set; }
-        public virtual ProductCategory Category { get; set; }
+        public virtual Category Category { get; set; }
 
         public virtual ICollection<Bid> Bids { get; set; } = new HashSet<Bid>();
 

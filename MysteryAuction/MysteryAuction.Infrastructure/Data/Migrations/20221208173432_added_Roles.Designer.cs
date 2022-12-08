@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MysteryAuction.Infrastructure.Data;
 
@@ -11,9 +12,10 @@ using MysteryAuction.Infrastructure.Data;
 namespace MysteryAuction.Data.Migrations
 {
     [DbContext(typeof(MysteryAuctionDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221208173432_added_Roles")]
+    partial class added_Roles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -283,6 +285,7 @@ namespace MysteryAuction.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("BuyerId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<Guid>("CategoryId")
@@ -417,7 +420,8 @@ namespace MysteryAuction.Data.Migrations
                     b.HasOne("MysteryAuction.Infrastructure.Data.Models.MysteryAuctionUser", "Buyer")
                         .WithMany("BoughtMysteryProducts")
                         .HasForeignKey("BuyerId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.HasOne("MysteryAuction.Infrastructure.Data.Models.Category", "Category")
                         .WithMany()
