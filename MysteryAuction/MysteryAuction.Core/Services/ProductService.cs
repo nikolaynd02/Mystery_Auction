@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using MysteryAuction.Core.Contracts;
 using MysteryAuction.Core.Models.Product;
 using MysteryAuction.Infrastructure.Data;
@@ -32,7 +26,7 @@ namespace MysteryAuction.Core.Services
                 {
                     ProductName = p.ProductName,
                     Description = p.Description,
-                    Category = p.Category.Category,
+                    Category = p.Category.Name,
                     ImageUrl = p.ImageUrl,
                     StartingPrice = p.StartingPrice,
                     AddedAt = p.AddedAt,
@@ -87,15 +81,22 @@ namespace MysteryAuction.Core.Services
                 return;
             }
 
+            
+
+            winningBid.Product.IsOver = true;
+
+
+
             winningBid.HasWon = true;
 
             context.Bids.Update(winningBid);
-            //TODO: Finish implementing. Product has to receive Buyer and User has to get product in his BoughtCollection
+
+            await context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<ProductCategory>> GetAllCategoriesAsync()
+        public async Task<IEnumerable<Category>> GetAllCategoriesAsync()
         {
-            return await context.ProductsCategories.ToListAsync();
+            return await context.Categories.ToListAsync();
         }
     }
 }
