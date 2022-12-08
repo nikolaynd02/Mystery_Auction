@@ -2,7 +2,7 @@
 @model AddProductViewModel
 
 @{
-    ViewBag.Title = "Add Book";
+    ViewBag.Title = "Add Product";
 }
 
 
@@ -37,7 +37,7 @@
                 <select asp-for="@Model.CategoryId" class="form-control">
                     @foreach (var category in Model.Categories)
                     {
-                            <option value="@category.Id">@category.Category</option>
+                            <option value="@category.Id">@category.Name</option>
                     }
                 </select>
                 <span asp-validation-for="CategoryId" class="text-danger"></span>

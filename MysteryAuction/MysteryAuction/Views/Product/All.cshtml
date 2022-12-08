@@ -1,5 +1,28 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using MysteryAuction.Core.Models.Product
+@model IEnumerable<ProductViewModel>
+
 @{
+    ViewBag.Title = "All Products";
 }
+
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="text-center row">
+    @foreach (var product in Model)
+    {
+        <div class="card col-4" style="width: 20rem; ">
+            <img class="card-img-top" style="width: 18rem;"
+                 src="@product.ImageUrl" alt="Book Image">
+            <div class="card-body">
+
+                <h5 class="card-title mt-1">@product.ProductName</h5>
+                <p class="mb-0">Description: @product.Description</p>
+                <p class="mb-0">Starting price: @product.StartingPrice</p>
+                <p>Category: @product.Category</p>
+            </div>
+
+        </div>
+    }
+</div>
