@@ -19,8 +19,4 @@
     <ProjectReference Include="..\MysteryAuction.Core\MysteryAuction.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\Bid\" />
-  </ItemGroup>
-
 </Project>

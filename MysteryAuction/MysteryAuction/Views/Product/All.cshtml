@@ -21,8 +21,14 @@
                 <p class="mb-0">Description: @product.Description</p>
                 <p class="mb-0">Starting price: @product.StartingPrice</p>
                 <p>Category: @product.Category</p>
+                <p>Starting Price: @product.StartingPrice</p>
             </div>
-
+            <div class="mb-3">
+                <form asp-area="" asp-action="Add" asp-controller="Bid" method="get">
+                    <input name="id" type="hidden" value="@product.Id" />
+                        <button type="submit" class="btn btn-primary">View product</button>
+                </form>
+                </div>
         </div>
     }
 </div>
