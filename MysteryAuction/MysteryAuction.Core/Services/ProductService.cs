@@ -19,6 +19,7 @@ namespace MysteryAuction.Core.Services
             var entities = await context
                 .Products
                 .Include(p => p.Category)
+                .Where(e => e.StartOfAuction.CompareTo(DateTime.Now) < 0 && !e.IsOver)
                 .ToListAsync();
 
             return entities
@@ -74,6 +75,13 @@ namespace MysteryAuction.Core.Services
                 .OrderByDescending(b => b.Price)
                 .ThenBy(b => b.MadeAt)
                 .FirstOrDefaultAsync();
+
+            var product = await context.Products.FindAsync(model.Id);
+
+            product!.IsOver = true;
+
+            context.Products.Update(product);
+            await context.SaveChangesAsync();
 
             //Test when there is no buyer
             if (winningBid == null)
