@@ -27,6 +27,14 @@
                     <input name="id" type="hidden" value="@Model.Id" />
                     <button type="submit" class="btn btn-primary">Place Bid</button>
                 </form>
+                <form asp-area="" asp-action="Add" asp-controller="ProductReport" method="get">
+                    <input name="id" type="hidden" value="@Model.Id" />
+                    <button type="submit" class="btn btn-primary">Report</button>
+                </form>
+                <form asp-area="" asp-action="Add" asp-controller="WatchList" method="post">
+                    <input name="id" type="hidden" value="@Model.Id" />
+                    <button type="submit" class="btn btn-primary">Add To Watchlist</button>
+                </form>
                 
             </div>
         </div>

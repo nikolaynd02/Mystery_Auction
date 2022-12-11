@@ -24,6 +24,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IBidService, BidService>();
+builder.Services.AddScoped<IProductReportService, ProductReportService>();
+builder.Services.AddScoped<IWatchListService, WatchListService>();
 
 var app = builder.Build();
 

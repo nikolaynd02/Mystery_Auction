@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MysteryAuction.Core.Contracts;
 using MysteryAuction.Core.Models.Product;
-using MysteryAuction.Core.Services;
-using MysteryAuction.Infrastructure.Data.Models;
 
 namespace MysteryAuction.Controllers
 {

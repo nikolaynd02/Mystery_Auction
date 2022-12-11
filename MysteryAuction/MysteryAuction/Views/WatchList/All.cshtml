@@ -1,0 +1,39 @@
+﻿@using MysteryAuction.Core.Models.Product
+@model IEnumerable<ProductViewModel>
+
+@{
+    ViewBag.Title = "Watchlist";
+}
+
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="text-center row">
+    @foreach (var product in Model)
+    {
+        <div class="card col-4" style="width: 20rem; ">
+            <img class="card-img-top" style="width: 18rem;"
+                 src="@product.ImageUrl" alt="Book Image">
+            <div class="card-body">
+
+                <h5 class="card-title mt-1">@product.ProductName</h5>
+                <p class="mb-0">Description: @product.Description</p>
+                <p class="mb-0">Starting price: @product.StartingPrice</p>
+                <p>Category: @product.Category</p>
+                <p>Starting Price: @product.StartingPrice</p>
+                <p>Participants: @product.Participants</p>
+            </div>
+            <div class="mb-3">
+                <form asp-area="" asp-action="Check" asp-controller="Product" method="get">
+                    <input name="id" type="hidden" value="@product.Id" />
+                    <button type="submit" class="btn btn-primary">View product</button>
+                </form>
+                    <form asp-area="" asp-action="Remove" asp-controller="WatchList" method="get">
+                        <input name="id" type="hidden" value="@product.Id" />
+                        <button type="submit" class="btn btn-primary">Remove From Watchlist</button>
+                    </form>
+            </div>
+        </div>
+    }
+</div>
