@@ -28,10 +28,17 @@ namespace MysteryAuction.Core.Services
 
         public async Task AddAsync(AddCategoryViewModel model)
         {
+            var categories = await context.Categories.Select(c => c.Name).ToListAsync();
+
             var entity = new Category()
             {
                 Name = model.Name
             };
+
+            if (categories.Contains(entity.Name))
+            {
+                return;
+            }
 
             await context.Categories.AddAsync(entity);
             await context.SaveChangesAsync();

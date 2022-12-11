@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MysteryAuction.Core.Contracts;
 using MysteryAuction.Core.Models.Bid;
-using MysteryAuction.Core.Models.Product;
 using MysteryAuction.Infrastructure.Data;
 using MysteryAuction.Infrastructure.Data.Models;
 
