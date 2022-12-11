@@ -1,0 +1,35 @@
+﻿@using MysteryAuction.Core.Models.Bid
+@model IEnumerable<BidViewModel>
+
+@{
+    ViewBag.Title = "Mine Bids";
+}
+
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="text-center row">
+    @foreach (var bid in Model)
+    {
+        <div class="card col-4" style="width: 20rem; ">
+            <img class="card-img-top" style="width: 18rem;"
+                 src="@bid.ImageUrl" alt="Book Image">
+            <div class="card-body">
+
+                    <h5 class="card-title mt-1">@bid.ProductName</h5>
+                    <p class="mb-0">Description: @bid.Description</p>
+                    <p>Category: @bid.Category</p>
+                    <p>Bid Amount: @bid.Price</p>
+                    <p>Participants: @bid.Participants</p>
+                    <p>MadeAt: @bid.MadeAt</p>
+            </div>
+            <div class="mb-3">
+                <form asp-area="" asp-action="Check" asp-controller="Product" method="get">
+                    <input name="id" type="hidden" value="@bid.ProductId" />
+                    <button type="submit" class="btn btn-primary">View product</button>
+                </form>
+            </div>
+        </div>
+    }
+</div>

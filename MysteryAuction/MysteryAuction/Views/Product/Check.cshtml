@@ -1,0 +1,33 @@
+﻿@using MysteryAuction.Core.Models.Product
+@model ProductViewModel
+
+@{
+    ViewBag.Title = "All Products";
+}
+
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="text-center row">
+    <div class="card col-4" style="width: 20rem; ">
+            <img class="card-img-top" style="width: 18rem;"
+                 src="@Model.ImageUrl" alt="Book Image">
+            <div class="card-body">
+
+                <h5 class="card-title mt-1">@Model.ProductName</h5>
+                <p class="mb-0">Description: @Model.Description</p>
+                <p class="mb-0">Starting price: @Model.StartingPrice</p>
+                <p>Category: @Model.Category</p>
+                <p>Starting Price: @Model.StartingPrice</p>
+                <p>Participants: @Model.Participants</p>
+            </div>
+            <div class="mb-3">
+                <form asp-area="" asp-action="Add" asp-controller="Bid" method="get">
+                    <input name="id" type="hidden" value="@Model.Id" />
+                    <button type="submit" class="btn btn-primary">Place Bid</button>
+                </form>
+                
+            </div>
+        </div>
+</div>

@@ -1,1 +1,30 @@
-﻿<dev>Hello</dev>
+﻿@using MysteryAuction.Core.Models.Bid
+@model AddBidViewModel
+
+@{
+    ViewBag.Title = "Add Product";
+}
+
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form asp-action="Add" asp-controller="Bid" method="post">
+            <div class="mb-3">
+                <label asp-for="@Model.Price" class="form-label">Bid amount in BGN:</label>
+                <input asp-for="@Model.Price" class="form-control" value="" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <input asp-for="@Model.ProductId" class="form-control" type="hidden" value="@Model.ProductId" />
+            <div class="mb-3">
+                <input class="btn btn-primary" type="submit" value="Place Bid" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -2,7 +2,7 @@
 @model IEnumerable<ProductViewModel>
 
 @{
-    ViewBag.Title = "All Products";
+    ViewBag.Title = "Bought Products";
 }
 
 
@@ -21,15 +21,8 @@
                 <p class="mb-0">Description: @product.Description</p>
                 <p class="mb-0">Starting price: @product.StartingPrice</p>
                 <p>Category: @product.Category</p>
-                <p>Starting Price: @product.StartingPrice</p>
-                <p>Participants: @product.Participants</p>
+                <p>Bought Price: @product.SoldPrice</p>
             </div>
-            <div class="mb-3">
-                <form asp-area="" asp-action="Check" asp-controller="Product" method="get">
-                    <input name="id" type="hidden" value="@product.Id" />
-                        <button type="submit" class="btn btn-primary">View product</button>
-                </form>
-                </div>
         </div>
     }
 </div>
