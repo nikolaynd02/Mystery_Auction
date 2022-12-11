@@ -19,7 +19,8 @@ namespace MysteryAuction.Infrastructure.Data.Models
 
         public MysteryAuctionUser Sender { get; set; }
 
-        [Required] 
+        [Required]
+        [MaxLength(DataConstraints.ProductReportConstraints.MaxDescriptionLength)]
         public string Description { get; set; } = null!;
 
         public bool IsResolved { get; set; }

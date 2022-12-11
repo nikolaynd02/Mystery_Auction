@@ -10,6 +10,8 @@ namespace MysteryAuction.Infrastructure.Data.Models
 
         public virtual ICollection<Bid> Bids { get; set; } = new HashSet<Bid>();
 
+        public virtual ICollection<Product> Products { get; set; } = new HashSet<Product>();
+
         public virtual ICollection<Product> MysteryProductsForSale { get; set; } = new HashSet<Product>();
 
         public virtual ICollection<Product> BoughtMysteryProducts { get; set; } = new HashSet<Product>();

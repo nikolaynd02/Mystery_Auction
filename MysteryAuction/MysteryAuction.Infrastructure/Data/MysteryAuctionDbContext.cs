@@ -21,9 +21,19 @@ namespace MysteryAuction.Infrastructure.Data
 
         public DbSet<ProductReport> ProductsReports { get; set; }
 
+        public DbSet<WatchList> WatchLists { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<WatchList>(e =>
+                e
+                    .HasKey(k => new
+                    {
+                        k.ProductId,
+                        k.UserId
+                    }));
+
             builder.Entity<Bid>(e =>
                 e
                     .HasKey(k => new

@@ -19,5 +19,11 @@
             public const int MaxNameLength = 20;
             public const int MinNameLength = 2;
         }
+
+        public class ProductReportConstraints
+        {
+            public const int MaxDescriptionLength = 2_000;
+            public const int MinDescriptionLength = 10;
+        }
     }
 }
