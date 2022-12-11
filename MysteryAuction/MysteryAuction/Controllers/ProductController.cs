@@ -19,6 +19,20 @@ namespace MysteryAuction.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> Check(Guid id)
+        {
+            var model = await productService.GetProductAsync(id);
+
+            if (model == null)
+            {
+                return RedirectToAction("All", "Product");
+            }
+
+            return View(model);
+        }
+
+
+        [HttpGet]
         public async Task<IActionResult> All()
         {
             var model = await productService.GetAllProductsAsync();
@@ -61,6 +75,26 @@ namespace MysteryAuction.Controllers
 
                 return View(model);
             }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Bought()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var model = await productService.GetUserBoughtProductsAsync(userId);
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Listed()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var model = await productService.GetUserProductsForSaleAsync(userId);
+
+            return View(model);
         }
 
     }

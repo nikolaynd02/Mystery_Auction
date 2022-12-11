@@ -119,25 +119,27 @@ namespace MysteryAuction.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public async Task<IActionResult> CreateRoles()
-        {
+        //Used to register admin user
 
-            await roleManager.CreateAsync(new IdentityRole(RoleConstants.Admin));
+        //public async Task<IActionResult> CreateRoles()
+        //{
 
-            return RedirectToAction("Index", "Home");
-        }
-        //Add role to the user found by the given email.
-        public async Task<IActionResult> AddUsersToRoles()
-        {
-            const string  email = "admin@mail.com";
+        //    await roleManager.CreateAsync(new IdentityRole(RoleConstants.Admin));
+
+        //    return RedirectToAction("Index", "Home");
+        //}
+        ////Add role to the user found by the given email.
+        //public async Task<IActionResult> AddUsersToRoles()
+        //{
+        //    const string  email = "admin@mail.com";
 
 
-            var user = await userManager.FindByNameAsync(email);
+        //    var user = await userManager.FindByNameAsync(email);
 
 
-            await userManager.AddToRolesAsync(user, new string[] { RoleConstants.Admin });
+        //    await userManager.AddToRolesAsync(user, new string[] { RoleConstants.Admin });
 
-            return RedirectToAction("Index", "Home");
-        }
+        //    return RedirectToAction("Index", "Home");
+        //}
     }
 }

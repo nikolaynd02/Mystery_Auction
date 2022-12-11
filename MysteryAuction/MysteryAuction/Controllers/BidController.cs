@@ -16,15 +16,21 @@ namespace MysteryAuction.Controllers
             this.bidService = _bidService;
         }
 
+
+
         [HttpGet]
-        public IActionResult Add(Guid id)
+        public  IActionResult Add(Guid id)
         {
-            return View();
+            return View(new AddBidViewModel()
+            {
+                ProductId = id
+            });
         }
 
         [HttpPost]
         public async Task<IActionResult> Add(AddBidViewModel model)
         {
+
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             model.UserId = userId;
@@ -39,7 +45,7 @@ namespace MysteryAuction.Controllers
                 await bidService.AddBidAsync(model);
 
                 //Redirect to User bids
-                return Ok();
+                return RedirectToAction("All","Product");
             }
             catch (Exception)
             {
@@ -47,6 +53,16 @@ namespace MysteryAuction.Controllers
 
                 return View(model);
             }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Mine()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var model = await bidService.GetUserBids(userId);
+
+            return View(model);
         }
     }
 }
