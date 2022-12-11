@@ -14,22 +14,56 @@ namespace MysteryAuction.Core.Services
         {
             this.context = _context;
         }
+
+        public async Task<ProductViewModel> GetProductAsync(Guid id)
+        {
+            var entity = await context.Products
+                .Include(p=>p.Category)
+                .FirstOrDefaultAsync(p => p.Id == id);
+
+            if (entity == null)
+            {
+                return null;
+            }
+
+            var product = new ProductViewModel()
+            {
+                Id = entity.Id,
+                ProductName = entity.ProductName,
+                Description = entity.Description,
+                Category = entity.Category.Name,
+                ImageUrl = entity.ImageUrl,
+                StartingPrice = entity.StartingPrice,
+                Participants = entity.Participants,
+                AddedAt = entity.AddedAt,
+                StartOfAuction = entity.StartOfAuction,
+                EndOfAuction = entity.EndOfAuction,
+                SellerId = entity.SellerId
+            };
+
+            return product;
+
+        }
+
+        //TODO: uncomment where in query, it is commented for test
         public async Task<IEnumerable<ProductViewModel>> GetAllProductsAsync()
         {
             var entities = await context
                 .Products
                 .Include(p => p.Category)
-                .Where(e => e.StartOfAuction.CompareTo(DateTime.Now) < 0 && !e.IsOver)
+                //.Where(e => e.StartOfAuction.CompareTo(DateTime.Now) < 0 && !e.IsOver)
                 .ToListAsync();
 
             return entities
                 .Select(p => new ProductViewModel()
                 {
+                    Id = p.Id,
                     ProductName = p.ProductName,
                     Description = p.Description,
                     Category = p.Category.Name,
                     ImageUrl = p.ImageUrl,
                     StartingPrice = p.StartingPrice,
+                    Participants = p.Participants,
                     AddedAt = p.AddedAt,
                     StartOfAuction = p.StartOfAuction,
                     EndOfAuction = p.EndOfAuction,
@@ -37,6 +71,54 @@ namespace MysteryAuction.Core.Services
                 });
         }
 
+        public async Task<IEnumerable<ProductViewModel>> GetUserBoughtProductsAsync(string userId)
+        {
+            var entities = await context.Products
+                .Include(p => p.Category)
+                .Where(p => p.BuyerId == userId)
+                .ToListAsync();
+
+            return entities
+                .Select(p => new ProductViewModel()
+                {
+                    Id = p.Id,
+                    ProductName = p.ProductName,
+                    Description = p.Description,
+                    Category = p.Category.Name,
+                    ImageUrl = p.ImageUrl,
+                    StartingPrice = p.StartingPrice,
+                    Participants = p.Participants,
+                    SoldPrice = p.SoldPrice,
+                    AddedAt = p.AddedAt,
+                    StartOfAuction = p.StartOfAuction,
+                    EndOfAuction = p.EndOfAuction,
+                    SellerId = p.SellerId
+                });
+        }
+
+        public async  Task<IEnumerable<ProductViewModel>> GetUserProductsForSaleAsync(string userId)
+        {
+            var entities = await context.Products
+                .Include(p => p.Category)
+                .Where(p => p.SellerId == userId)
+                .ToListAsync();
+
+            return entities
+                .Select(p => new ProductViewModel()
+                {
+                    Id = p.Id,
+                    ProductName = p.ProductName,
+                    Description = p.Description,
+                    Category = p.Category.Name,
+                    ImageUrl = p.ImageUrl,
+                    StartingPrice = p.StartingPrice,
+                    Participants = p.Participants,
+                    AddedAt = p.AddedAt,
+                    StartOfAuction = p.StartOfAuction,
+                    EndOfAuction = p.EndOfAuction,
+                    SellerId = p.SellerId
+                });
+        }
         public async Task AddProductAsync(AddProductViewModel model)
         {
             DateTime dateAdded = DateTime.Today;

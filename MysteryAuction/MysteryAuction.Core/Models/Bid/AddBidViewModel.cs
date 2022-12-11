@@ -17,5 +17,7 @@ namespace MysteryAuction.Core.Models.Bid
         [Range(DataConstraints.MysteryProductConstraints.MinPrice, DataConstraints.MysteryProductConstraints.MaxPrice)]
         public decimal Price { get; set; }
 
+        public DateTime MadeAt { get; set; } 
+
     }
 }

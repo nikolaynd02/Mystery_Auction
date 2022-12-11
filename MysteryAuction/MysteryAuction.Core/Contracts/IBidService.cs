@@ -6,5 +6,6 @@ namespace MysteryAuction.Core.Contracts
     {
         public Task AddBidAsync(AddBidViewModel model);
 
+        public Task<IEnumerable<BidViewModel>> GetUserBids(string userId);
     }
 }

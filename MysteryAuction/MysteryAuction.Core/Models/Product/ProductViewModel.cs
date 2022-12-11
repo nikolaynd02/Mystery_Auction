@@ -3,7 +3,7 @@ namespace MysteryAuction.Core.Models.Product
 {
     public class ProductViewModel
     {
-        public string Id { get; set; } = null!;
+        public Guid Id { get; set; } 
 
         public string ProductName { get; set; } = null!;
 
@@ -13,7 +13,11 @@ namespace MysteryAuction.Core.Models.Product
 
         public string ImageUrl { get; set; } = null!;
 
+        public int Participants { get; set; }
+
         public decimal StartingPrice { get; set; }
+
+        public decimal? SoldPrice { get; set; }
 
         public DateTime AddedAt { get; set; }
 

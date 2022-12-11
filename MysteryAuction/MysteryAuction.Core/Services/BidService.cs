@@ -1,5 +1,7 @@
-﻿using MysteryAuction.Core.Contracts;
+﻿using Microsoft.EntityFrameworkCore;
+using MysteryAuction.Core.Contracts;
 using MysteryAuction.Core.Models.Bid;
+using MysteryAuction.Core.Models.Product;
 using MysteryAuction.Infrastructure.Data;
 using MysteryAuction.Infrastructure.Data.Models;
 
@@ -16,7 +18,16 @@ namespace MysteryAuction.Core.Services
 
         public async Task AddBidAsync(AddBidViewModel model)
         {
-            var entity = new Bid()
+            var entity =
+                await context.Bids
+                    .FirstOrDefaultAsync(b => b.UserId == model.UserId && b.ProductId == model.ProductId);
+
+            if (entity != null)
+            {
+                return;
+            }
+
+            var newBid = new Bid()
             {
                 UserId = model.UserId,
                 ProductId = model.ProductId,
@@ -25,9 +36,39 @@ namespace MysteryAuction.Core.Services
                 HasWon = false
             };
 
-            await context.Bids.AddAsync(entity);
+            var product = await context.Products.FindAsync(model.ProductId);
+
+
+            product!.Participants += 1;
+
+            context.Products.Update(product);
+
+            await context.Bids.AddAsync(newBid);
             await context.SaveChangesAsync();
         }
 
+        public async Task<IEnumerable<BidViewModel>> GetUserBids(string userId)
+        {
+            var entities = await context.Bids
+                .Include(b => b.Product)
+                .ThenInclude(p => p.Category)
+                .Include(b => b.User)
+                .Where(b => b.UserId == userId && b.Product.IsOver == false)
+                .ToListAsync();
+
+            return entities
+                .Select(b => new BidViewModel()
+                {
+                    UserId = b.UserId,
+                    ProductId = b.ProductId,
+                    Price = b.Price,
+                    Category = b.Product.Category.Name,
+                    Description = b.Product.Description,
+                    ImageUrl = b.Product.ImageUrl,
+                    MadeAt = b.MadeAt,
+                    Participants = b.Product.Participants,
+                    ProductName = b.Product.ProductName
+                });
+        }
     }
 }
