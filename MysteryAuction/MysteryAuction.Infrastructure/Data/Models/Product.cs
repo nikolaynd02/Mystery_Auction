@@ -31,6 +31,10 @@ namespace MysteryAuction.Infrastructure.Data.Models
 
         public DateTime EndOfAuction { get; set; }
 
+        public int Participants { get; set; } = 0;
+
+        public bool IsReported { get; set; }
+
         public bool IsOver { get; set; }
 
         [ForeignKey(nameof(Seller))]
@@ -48,6 +52,8 @@ namespace MysteryAuction.Infrastructure.Data.Models
         public virtual Category Category { get; set; }
 
         public virtual ICollection<Bid> Bids { get; set; } = new HashSet<Bid>();
+
+        public virtual ICollection<ProductReport> Reports { get; set; } = new HashSet<ProductReport>();
 
     }
 }

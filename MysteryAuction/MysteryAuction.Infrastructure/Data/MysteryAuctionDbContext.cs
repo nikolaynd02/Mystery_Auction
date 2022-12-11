@@ -19,6 +19,8 @@ namespace MysteryAuction.Infrastructure.Data
 
         public DbSet<Category> Categories { get; set; }
 
+        public DbSet<ProductReport> ProductsReports { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -29,6 +31,7 @@ namespace MysteryAuction.Infrastructure.Data
                         k.UserId,
                         k.ProductId
                     }));
+
 
 
             builder.Entity<Product>(e =>

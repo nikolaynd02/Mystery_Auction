@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MysteryAuction.Infrastructure.Data;
 
@@ -11,9 +12,10 @@ using MysteryAuction.Infrastructure.Data;
 namespace MysteryAuction.Data.Migrations
 {
     [DbContext(typeof(MysteryAuctionDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221210141054_Added_Tables_UsersReports_And_ProductsReports")]
+    partial class Added_Tables_UsersReports_And_ProductsReports
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -306,9 +308,6 @@ namespace MysteryAuction.Data.Migrations
                     b.Property<bool>("IsReported")
                         .HasColumnType("bit");
 
-                    b.Property<int>("Participants")
-                        .HasColumnType("int");
-
                     b.Property<string>("ProductName")
                         .IsRequired()
                         .HasMaxLength(20)
@@ -365,6 +364,34 @@ namespace MysteryAuction.Data.Migrations
                     b.HasIndex("SenderId");
 
                     b.ToTable("ProductsReports");
+                });
+
+            modelBuilder.Entity("MysteryAuction.Infrastructure.Data.Models.UserReport", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsResolved")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ReportedUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SenderId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SenderId");
+
+                    b.ToTable("UsersReports");
                 });
 
             modelBuilder.Entity("MysteryAuction.Infrastructure.Data.Models.MysteryAuctionUser", b =>
@@ -495,6 +522,17 @@ namespace MysteryAuction.Data.Migrations
                     b.Navigation("Sender");
                 });
 
+            modelBuilder.Entity("MysteryAuction.Infrastructure.Data.Models.UserReport", b =>
+                {
+                    b.HasOne("MysteryAuction.Infrastructure.Data.Models.MysteryAuctionUser", "Sender")
+                        .WithMany("Reports")
+                        .HasForeignKey("SenderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Sender");
+                });
+
             modelBuilder.Entity("MysteryAuction.Infrastructure.Data.Models.Product", b =>
                 {
                     b.Navigation("Bids");
@@ -509,6 +547,8 @@ namespace MysteryAuction.Data.Migrations
                     b.Navigation("BoughtMysteryProducts");
 
                     b.Navigation("MysteryProductsForSale");
+
+                    b.Navigation("Reports");
                 });
 #pragma warning restore 612, 618
         }
