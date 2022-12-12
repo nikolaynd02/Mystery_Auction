@@ -17,10 +17,10 @@ namespace MysteryAuction.Controllers
 
         public IActionResult Index()
         {
-            //if (User.IsInRole("Admin"))
-            //{
-            //    return RedirectToAction("All", "ProductReport");
-            //}
+            if (User.IsInRole("Admin"))
+            {
+                return RedirectToAction("All", "ProductReport", new {area = "Admin"});
+            }
             return RedirectToAction("All", "Product");
         }
 
