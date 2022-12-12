@@ -34,15 +34,33 @@ namespace MysteryAuction.Core.Services
             var entities = await context.ProductsReports
                 .Include(r => r.Product)
                 .Include(r => r.Sender)
+                .OrderBy(r => r.IsResolved)
                 .ToListAsync();
 
             return entities.Select(r => new ProductReportViewModel()
             {
+                Id = r.Id,
                 SenderEmail = r.Sender.Email,
                 ProductName = r.Product.ProductName,
-                Description = r.Product.Description,
+                Description = r.Description,
                 IsResolved = r.IsResolved
             });
+        }
+
+        public async Task Resolved(Guid id)
+        {
+            var entity = await context.ProductsReports.FindAsync(id);
+
+            if (entity == null)
+            {
+                return;
+            }
+
+            entity.IsResolved = true;
+
+            context.ProductsReports.Update(entity);
+            await context.SaveChangesAsync();
+
         }
     }
 }

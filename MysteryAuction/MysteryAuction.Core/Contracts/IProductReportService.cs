@@ -9,5 +9,7 @@ namespace MysteryAuction.Core.Contracts
 
         public Task<IEnumerable<ProductReportViewModel>> GetAllAsync();
 
+        public Task Resolved(Guid id);
+
     }
 }
