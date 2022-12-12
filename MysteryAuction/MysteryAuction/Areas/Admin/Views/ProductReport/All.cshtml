@@ -1,0 +1,31 @@
+﻿@using MysteryAuction.Core.Models.ProductReport
+@model IEnumerable<ProductReportViewModel>
+
+@{
+    ViewBag.Title = "All Reports";
+}
+
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="text-center row">
+    @foreach (var report in Model)
+    {
+        <div class="card col-4" style="width: 20rem; ">
+            <div class="card-body">
+
+                    <h5 class="card-title mt-1">@report.ProductName</h5>
+                    <p class="mb-0">Description: @report.Description</p>
+                <p>Sender: @report.SenderEmail</p>
+                <p>IsResolved: @report.IsResolved</p>
+            </div>
+            <div class="mb-3">
+                <form asp-area="Admin" asp-action="Resolved" asp-controller="ProductReport" method="post">
+                    <input name="id" type="hidden" value="@report.Id" />
+                    <button type="submit" class="btn btn-primary">Resolve</button>
+                </form>
+            </div>
+        </div>
+    }
+</div>
