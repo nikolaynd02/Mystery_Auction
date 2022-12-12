@@ -54,6 +54,8 @@ namespace MysteryAuction.Core.Services
             await context.SaveChangesAsync();
         }
 
+        //When Testing
+        //Comment Then include Category and in the binding comment category 
         public async Task<IEnumerable<BidViewModel>> GetUserBids(string userId)
         {
             var entities = await context.Bids
