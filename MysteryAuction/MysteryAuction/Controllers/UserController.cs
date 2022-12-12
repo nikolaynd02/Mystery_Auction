@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Ganss.Xss;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MysteryAuction.Core.Constants;
@@ -42,6 +43,10 @@ namespace MysteryAuction.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
+            var sanitizer = new HtmlSanitizer();
+            model.Email = sanitizer.Sanitize(model.Email);
+            model.UserName = sanitizer.Sanitize(model.UserName);
+
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -89,6 +94,8 @@ namespace MysteryAuction.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
+            var sanitizer = new HtmlSanitizer();
+            model.UserName = sanitizer.Sanitize(model.UserName);
             if (!ModelState.IsValid)
             {
                 return View(model);

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Ganss.Xss;
+using Microsoft.AspNetCore.Mvc;
 using MysteryAuction.Core.Contracts;
 using MysteryAuction.Core.Models.ProductReport;
 using MysteryAuction.Core.Services;
@@ -30,6 +31,9 @@ namespace MysteryAuction.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(AddProductReportViewModel model)
         {
+            var sanitizer = new HtmlSanitizer();
+            model.Description = sanitizer.Sanitize(model.Description);
+
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             model.SenderId = userId;

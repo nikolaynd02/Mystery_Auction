@@ -1,4 +1,5 @@
 ﻿using System.Security.Claims;
+using Ganss.Xss;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MysteryAuction.Core.Contracts;
@@ -54,6 +55,10 @@ namespace MysteryAuction.Controllers
         {
             model.SellerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
+            var sanitizer = new HtmlSanitizer();
+            model.Description = sanitizer.Sanitize(model.Description);
+            model.ImageUrl = sanitizer.Sanitize(model.ImageUrl);
+            model.ProductName = sanitizer.Sanitize(model.ProductName);
 
             if (!ModelState.IsValid)
             {
