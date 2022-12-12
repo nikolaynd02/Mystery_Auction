@@ -26,6 +26,12 @@ namespace MysteryAuction.Core.Services
                 return;
             }
 
+            var bids = await GetUserBids(model.UserId);
+
+            if (bids.Any(b => b.UserId == model.UserId))
+            {
+                return;
+            }
             var newBid = new Bid()
             {
                 UserId = model.UserId,
@@ -34,6 +40,8 @@ namespace MysteryAuction.Core.Services
                 MadeAt = DateTime.Now,
                 HasWon = false
             };
+
+
 
             var product = await context.Products.FindAsync(model.ProductId);
 

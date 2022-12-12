@@ -13,7 +13,7 @@
     <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
         <form asp-action="Add" asp-controller="Category" method="post">
             <div class="mb-3">
-                <label asp-for="@Model.Name" class="form-label">Product's Name:</label>
+                <label asp-for="@Model.Name" class="form-label">Category's Name:</label>
                 <input asp-for="@Model.Name" class="form-control" aria-required="true" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>

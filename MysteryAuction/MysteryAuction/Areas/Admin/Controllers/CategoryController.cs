@@ -39,7 +39,7 @@ namespace MysteryAuction.Areas.Admin.Controllers
             {
                 await categoryService.AddAsync(model);
 
-                return RedirectToAction(nameof(All));
+                return RedirectToAction("All");
             }
             catch (Exception)
             {

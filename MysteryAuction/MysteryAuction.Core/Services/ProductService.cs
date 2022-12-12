@@ -51,7 +51,7 @@ namespace MysteryAuction.Core.Services
             var entities = await context
                 .Products
                 .Include(p => p.Category)
-                .Where(e => e.StartOfAuction.CompareTo(DateTime.Now) < 0 && !e.IsOver)
+                //.Where(e => e.StartOfAuction.CompareTo(DateTime.Now) < 0 && !e.IsOver)
                 .ToListAsync();
 
             return entities

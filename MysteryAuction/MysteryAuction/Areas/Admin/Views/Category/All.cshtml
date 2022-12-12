@@ -1,0 +1,22 @@
+﻿@using MysteryAuction.Core.Models.CategoryModels
+@model IEnumerable<CategoryViewModel>
+
+@{
+    ViewBag.Title = "All Categories";
+}
+
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="row">
+    @foreach (var category in Model)
+    {
+
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <div class="mb-3">
+            <p>Category Name: @category.Name </p>
+        </div>
+    </div>
+    }
+</div>

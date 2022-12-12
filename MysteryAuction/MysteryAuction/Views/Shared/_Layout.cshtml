@@ -19,6 +19,8 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
+                        @if (!User.IsInRole("Admin"))
+                        {
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
@@ -37,10 +39,17 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="WatchList" asp-action="All">Watchlist</a>
                         </li>
-                        @if (User.IsInRole("Admin"))
+                        }
+                        else
                         {
                             <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="ProductReport" asp-action="All">Reports</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="Admin" asp-controller="Category" asp-action="Add">Add Category</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Category" asp-action="All">All Categories</a>
                             </li>
                         }
                     </ul>
