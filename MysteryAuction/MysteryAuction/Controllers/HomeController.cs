@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using MysteryAuction.Core.Models;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace MysteryAuction.Controllers
 {
@@ -17,7 +19,7 @@ namespace MysteryAuction.Controllers
         {
             //if (User.IsInRole("Admin"))
             //{
-            //    return RedirectToAction("All","Category");
+            //    return RedirectToAction("All", "ProductReport");
             //}
             return RedirectToAction("All", "Product");
         }
