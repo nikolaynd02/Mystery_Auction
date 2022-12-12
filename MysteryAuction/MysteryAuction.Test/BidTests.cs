@@ -75,7 +75,7 @@ namespace MysteryAuction.Core.Test
         }
 
 
-        //Refuses to obey direct orders
+        //Go to BidService and comment part of the db query
         [Test]
         public async Task Test_Get_User_Bids()
         {
@@ -112,7 +112,6 @@ namespace MysteryAuction.Core.Test
             await context.Bids.AddAsync(bid);
             await context.SaveChangesAsync();
             //Act
-            //Collection should have 1 model, and the other 0 but both of them return count 0
             var collection = await bidService.GetUserBids(user.Id);
             var collection2 = await bidService.GetUserBids("NoUser");
 
