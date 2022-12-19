@@ -28,7 +28,7 @@ namespace MysteryAuction.Core.Services
 
             var bids = await GetUserBids(model.UserId);
 
-            if (bids.Any(b => b.UserId == model.UserId))
+            if (bids.Any(b => b.UserId == model.UserId && b.ProductId == model.ProductId))
             {
                 return;
             }

@@ -153,7 +153,7 @@ namespace MysteryAuction.Core.Services
         {
             var winningBid = await context.Bids
                 .Include(b => b.Product)
-                .Where(b => b.Product.ProductName == model.ProductName)
+                .Where(b => b.Product.ProductName == model.ProductName && b.Price > b.Product.StartingPrice)
                 .OrderByDescending(b => b.Price)
                 .ThenBy(b => b.MadeAt)
                 .FirstOrDefaultAsync();

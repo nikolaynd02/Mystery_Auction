@@ -44,8 +44,8 @@ namespace MysteryAuction.Controllers
             {
                 await bidService.AddBidAsync(model);
 
-                //Redirect to User bids
-                return RedirectToAction("All","Product");
+                //Redirects to this User bids
+                return RedirectToAction("Mine","Bid");
             }
             catch (Exception)
             {
