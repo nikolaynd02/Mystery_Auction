@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MysteryAuction.Core.Contracts;
 using MysteryAuction.Core.Services;
+using MysteryAuction.Core.Services.MessagingService;
 using MysteryAuction.Infrastructure.Data;
 using MysteryAuction.Infrastructure.Data.Models;
 
@@ -26,6 +27,8 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IBidService, BidService>();
 builder.Services.AddScoped<IProductReportService, ProductReportService>();
 builder.Services.AddScoped<IWatchListService, WatchListService>();
+
+builder.Services.AddTransient<IEmailSender>(x => new SendGridEmailSender("SendGrid:ApiKey"));
 
 var app = builder.Build();
 
