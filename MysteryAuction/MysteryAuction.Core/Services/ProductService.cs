@@ -1,18 +1,23 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MysteryAuction.Core.Contracts;
 using MysteryAuction.Core.Models.Product;
+using MysteryAuction.Core.Services.MessagingService;
 using MysteryAuction.Infrastructure.Data;
 using MysteryAuction.Infrastructure.Data.Models;
+using System.Text;
 
 namespace MysteryAuction.Core.Services
 {
     public class ProductService : IProductService
     {
         private readonly MysteryAuctionDbContext context;
+        private readonly IEmailSender emailService;
 
-        public ProductService(MysteryAuctionDbContext _context)
+        public ProductService(MysteryAuctionDbContext _context,
+         IEmailSender _emailService)
         {
             this.context = _context;
+            this.emailService = _emailService;
         }
 
         public async Task<ProductViewModel> GetProductAsync(Guid id)
@@ -148,7 +153,6 @@ namespace MysteryAuction.Core.Services
             await context.SaveChangesAsync();
         }
 
-        //Might not be the right place for it.
         public async Task ChooseBuyerAsync(ProductViewModel model)
         {
             var winningBid = await context.Bids
@@ -171,7 +175,12 @@ namespace MysteryAuction.Core.Services
                 return;
             }
 
+            //Sends email to auction winner
+            var sb = new StringBuilder();
             
+            sb.AppendLine($"You have won product: {product.ProductName} with bid of {winningBid.Price:f2} BGN");
+            await this.emailService.SendEmailAsync("orel_22@abv.bg", "MysteryAuction", winningBid.User.Email, $"Won auction for {product.ProductName}", sb.ToString());
+            Console.WriteLine("Email send successfully");
 
             winningBid.Product.IsOver = true;
 

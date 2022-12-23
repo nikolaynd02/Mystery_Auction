@@ -3,6 +3,7 @@ using MysteryAuction.Core.Contracts;
 using MysteryAuction.Core.Models.CategoryModels;
 using MysteryAuction.Core.Models.Product;
 using MysteryAuction.Core.Services;
+using MysteryAuction.Core.Services.MessagingService;
 using MysteryAuction.Infrastructure.Data;
 using MysteryAuction.Infrastructure.Data.Models;
 
@@ -20,8 +21,9 @@ namespace MysteryAuction.Core.Test
             var dBBuilder = new DbContextOptionsBuilder<MysteryAuctionDbContext>()
                 .UseInMemoryDatabase(Guid.NewGuid().ToString());
             context = new MysteryAuctionDbContext(dBBuilder.Options);
-
-            this.productService = new ProductService(context);
+            //Email won't be tested
+            IEmailSender emailSender = null;
+            this.productService = new ProductService(context, emailSender);
 
             await context.Categories.AddAsync(new Category()
             {
