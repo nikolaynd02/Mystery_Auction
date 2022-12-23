@@ -4,9 +4,11 @@ using MysteryAuction.Core.Contracts;
 using MysteryAuction.Core.Models.ProductReport;
 using MysteryAuction.Core.Services;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MysteryAuction.Controllers
 {
+    [Authorize]
     public class ProductReportController : Controller
     {
         private readonly IProductReportService productReportService;
@@ -39,9 +41,8 @@ namespace MysteryAuction.Controllers
             model.SenderId = userId;
 
             if (!ModelState.IsValid)
-            {
                 return View(model);
-            }
+            
 
             try
             {

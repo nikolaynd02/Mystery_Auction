@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using MysteryAuction.Core.Constants;
 using MysteryAuction.Core.Models.User;
 using MysteryAuction.Infrastructure.Data.Models;
 
@@ -30,7 +29,7 @@ namespace MysteryAuction.Controllers
         {
             if (User?.Identity?.IsAuthenticated ?? false)
             {
-                //TODO: Add redirection
+                
                 return Ok();
             }
 
@@ -62,7 +61,7 @@ namespace MysteryAuction.Controllers
 
             if (result.Succeeded)
             {
-                //TODO: Add redirection
+                
                 return Ok();
             }
 
@@ -78,10 +77,10 @@ namespace MysteryAuction.Controllers
         [AllowAnonymous]
         public IActionResult Login()
         {
-            //TODO: 
+             
             if (User?.Identity?.IsAuthenticated ?? false)
             {
-                //TODO: Add redirection
+                
                 return Ok();
             }
 
@@ -107,7 +106,7 @@ namespace MysteryAuction.Controllers
             {
                 var result = await signInManager.PasswordSignInAsync(user, model.Password, false, false);
                 
-                //TODO: Add redirection
+                
                 if (result.Succeeded)
                 {
                     return Ok();
